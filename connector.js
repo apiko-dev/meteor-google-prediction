@@ -54,8 +54,8 @@ GooglePrediction.prototype['delete'] = function (modelName) {
 };
 
 
-GooglePrediction.prototype.update = function (modelName) {
-  return this._makeRequest('PUT', this._baseUrl(modelName));
+GooglePrediction.prototype.update = function (modelName, updateData) {
+  return this._makeRequest('PUT', this._baseUrl(modelName), updateData);
 };
 
 
