@@ -8,7 +8,7 @@ GooglePrediction = function GooglePrediction(options) {
     path: this._assetsFolderAbsolutePath(options.pemFile)
   };
   this.projectName = options.projectName;
-  this._timeoutTreshold = 120000;
+  this._timeoutTreshold = options.timeoutTreshold || 120000;
 };
 
 
