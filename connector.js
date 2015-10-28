@@ -8,6 +8,7 @@ GooglePrediction = function GooglePrediction(options) {
     path: this._assetsFolderAbsolutePath(options.pemFile)
   };
   this.projectName = options.projectName;
+  this._timeoutTreshold = 120000;
 };
 
 
@@ -68,13 +69,30 @@ GooglePrediction.prototype._auth = function () {
 
 GooglePrediction.prototype._makeRequest = function (method, url, data) {
   var authCredentials = this._auth();
-  var result = HTTP.call(method, url, {
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": authCredentials.token_type + ' ' + authCredentials.access_token
-    },
-    data: data
-  });
+  var result = false;
+  var timeout = 200;
+
+  while (!result) {
+    try {
+      result = HTTP.call(method, url, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": authCredentials.token_type + ' ' + authCredentials.access_token
+        },
+        data: data
+      });
+    } catch (err) {
+      console.log('Error for timeout: ', timeout, err);
+      if (timeout <= this._timeoutTreshold) {
+        throw err;
+      } else {
+        timeout *= 2;
+      }
+    } finally {
+      Meteor._sleepForMs(timeout);
+    }
+  }
+
   return result.data;
 };
 
