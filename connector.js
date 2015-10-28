@@ -68,18 +68,14 @@ GooglePrediction.prototype._auth = function () {
 
 GooglePrediction.prototype._makeRequest = function (method, url, data) {
   var authCredentials = this._auth();
-  try {
-    var result = HTTP.call(method, url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": authCredentials.token_type + ' ' + authCredentials.access_token
-      },
-      data: data
-    });
-    return result.data;
-  } catch (err) {
-    throw new Meteor.Error(500, 'Error while access Prediction API: ' + err.reason + '\nURL: ' + url)
-  }
+  var result = HTTP.call(method, url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": authCredentials.token_type + ' ' + authCredentials.access_token
+    },
+    data: data
+  });
+  return result.data;
 };
 
 
