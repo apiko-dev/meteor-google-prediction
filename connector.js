@@ -83,7 +83,7 @@ GooglePrediction.prototype._makeRequest = function (method, url, data) {
       });
     } catch (err) {
       console.log('Error for timeout: ', timeout, err);
-      if (timeout <= this._timeoutTreshold) {
+      if (timeout > this._timeoutTreshold) {
         throw err;
       } else {
         timeout *= 2;
