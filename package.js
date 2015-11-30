@@ -1,6 +1,6 @@
 Package.describe({
   name: 'jss:meteor-google-prediction',
-  version: '0.2.1',
+  version: '0.2.2',
   summary: 'Google Prediction API v1.6 client',
   git: 'https://github.com/JSSolutions/meteor-google-prediction'
 });
