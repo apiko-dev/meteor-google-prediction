@@ -1,12 +1,13 @@
-var PredictionClient = Npm.require('node-google-prediction');
-
+var TokenCache = Npm.require('google-oauth-jwt').TokenCache;
+var tokens = new TokenCache();
 
 GooglePrediction = function GooglePrediction(options) {
   this._authOptions = {
-    claimSetISS: options.serviceEmail,
-    //pem should be located in private directory
-    path: this._assetsFolderAbsolutePath(options.pemFile)
+    email: options.serviceEmail,
+    keyFile: this._assetsFolderAbsolutePath(options.pemFile),
+    scopes: ['https://www.googleapis.com/auth/prediction']
   };
+
   this.projectName = options.projectName;
   this._timeoutTreshold = options.timeoutTreshold || 120000;
 };
@@ -61,9 +62,12 @@ GooglePrediction.prototype.update = function (modelName, updateData) {
 
 
 GooglePrediction.prototype._auth = function () {
-  this._client = new PredictionClient(this._authOptions);
-  var syncToken = Meteor.wrapAsync(this._client.accessTokenRequest, this._client);
-  return syncToken();
+  var syncTokenFn = Meteor.wrapAsync(tokens.get, tokens);
+  var token = syncTokenFn(this._authOptions);
+  return {
+    accessToken: token,
+    tokenType: 'Bearer'
+  };
 };
 
 
@@ -77,7 +81,7 @@ GooglePrediction.prototype._makeRequest = function (method, url, data) {
       result = HTTP.call(method, url, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": authCredentials.token_type + ' ' + authCredentials.access_token
+          "Authorization": authCredentials.tokenType + ' ' + authCredentials.accessToken
         },
         data: data
       });
