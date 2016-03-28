@@ -1,3 +1,5 @@
+var GOOGLE_AUTH_SCOPES = ['https://www.googleapis.com/auth/devstorage.read_only', 'https://www.googleapis.com/auth/prediction'];
+
 var TokenCache = Npm.require('google-oauth-jwt').TokenCache;
 var tokens = new TokenCache();
 
@@ -5,7 +7,7 @@ GooglePrediction = function GooglePrediction(options) {
   this._authOptions = {
     email: options.serviceEmail,
     keyFile: this._assetsFolderAbsolutePath(options.pemFile),
-    scopes: ['https://www.googleapis.com/auth/prediction']
+    scopes: GOOGLE_AUTH_SCOPES
   };
 
   this.projectName = options.projectName;
