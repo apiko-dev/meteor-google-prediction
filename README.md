@@ -41,7 +41,14 @@ __Supported methods:__
 * predict
 * update
 
-
 Also, see [full API Reference](https://cloud.google.com/prediction/docs/reference/v1.6/)
+
+
+__Getting PEM file:__
+
+This package is build on top of `google-oauth-jwt` npm package. Here's [detailed instruction](https://www.npmjs.com/package/google-oauth-jwt#creating-a-service-account-using-the-google-developers-console) how to generate `.pem` file.
+
+-------------
+
 
 Made by [![Professional Meteor Development Studio](http://s30.postimg.org/jfno1g71p/jss_xs.png)](http://jssolutionsdev.com) - [Professional Meteor Development Company](http://jssolutionsdev.com)
