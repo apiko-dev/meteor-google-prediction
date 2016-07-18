@@ -1,7 +1,8 @@
 # Google Prediction API Client
+
 Google Prediction API v1.6 client for Meteor.
 
-__Quick example:__
+## Quick example
 
 ```
 //initialize client
@@ -31,7 +32,7 @@ var result = googlePrediction.predict("MyModel", inputData);//access to predicti
 console.log('Predicted Value: ', result.outputValue);
 ```
 
-__Supported methods:__
+## Supported methods
 
 * analyze
 * delete
@@ -44,9 +45,9 @@ __Supported methods:__
 Also, see [full API Reference](https://cloud.google.com/prediction/docs/reference/v1.6/)
 
 
-__Getting PEM file:__
+## Getting PEM file
 
-This package is build on top of `google-oauth-jwt` npm package. Here's [detailed instruction](https://www.npmjs.com/package/google-oauth-jwt#creating-a-service-account-using-the-google-developers-console) how to generate `.pem` file.
+This package is built on top of `google-oauth-jwt` npm package. Here's [detailed instruction](https://www.npmjs.com/package/google-oauth-jwt#creating-a-service-account-using-the-google-developers-console) how to generate `.pem` file.
 
 -------------
 
