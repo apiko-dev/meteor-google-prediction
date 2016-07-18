@@ -11,7 +11,7 @@ GooglePrediction = function GooglePrediction(options) {
   };
 
   this.projectName = options.projectName;
-  this._timeoutTreshold = options.timeoutTreshold || 120000;
+  this._timeoutTreshold = options.timeoutTreshold || 20000;
 };
 
 
@@ -88,6 +88,8 @@ GooglePrediction.prototype._makeRequest = function (method, url, data) {
         data: data
       });
     } catch (err) {
+      console.error('Google Prediction API Error:', err.response.statusCode);
+
       if (timeout > this._timeoutTreshold) {
         throw err;
       } else {
