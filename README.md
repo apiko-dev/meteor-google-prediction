@@ -4,7 +4,7 @@ Google Prediction API v1.6 client for Meteor.
 
 ## Quick example
 
-```
+```js
 //initialize client
 var authOptions = {
   serviceEmail: CloudSettings.SERVICE_EMAIL,
